@@ -1,5 +1,6 @@
 package com.aa.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -30,51 +31,62 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(length = 125, nullable = false, unique = true) 
-	@Email(message = "E-mail is not valid") 
+
+	@Column(length = 125, nullable = false, unique = true)
+	@Email(message = "E-mail is not valid")
 	@Length(min = 5, max = 125, message = "E-mail must have 5-125 characters")
 	private String email;
-	
+
 	@Column(length = 64, nullable = false)
 	@NotBlank(message = "Password is required")
-	@Length(min= 5, max = 64, message = "Password must have 5-64 characters")
+	@Length(min = 5, max = 64, message = "Password must have 5-64 characters")
 	private String password;
-	
+
 	@Column(length = 45, nullable = false)
 	@NotBlank(message = "First name is required")
 	@Length(min = 2, max = 45, message = "First name mush have between 5 and 45 characters")
 	private String firstName;
-	
+
 	@Column(length = 45, nullable = false)
 	@NotBlank(message = "Last name is required")
 	@Length(min = 2, max = 45, message = "Last name mush have min 5 and max 45 characters")
 	private String lastName;
-	
+
 	private Date joinDate;
-	
+
 	private Date lastLoginDate;
-	
+
 	private boolean isEnabled;
-	
+
 	private boolean isNotLocked;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "users_roles",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-			)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
-	
+
 	@OneToMany(mappedBy = "user")
-	private List<Rent> rents;
-	
+	private List<Rent> rents = new ArrayList<>();
+
 	public User() {}
+
+	public User(String email, String password, String firstName, String lastName, Date joinDate, Date lastLoginDate,
+			boolean isEnabled, boolean isNotLocked, Address address, Role role) {
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.joinDate = joinDate;
+		this.lastLoginDate = lastLoginDate;
+		this.isEnabled = isEnabled;
+		this.isNotLocked = isNotLocked;
+		this.address = address;
+		this.roles.add(role);
+	}
 
 	public Integer getId() {
 		return id;
@@ -177,5 +189,5 @@ public class User {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", address=" + address + ", roles=" + roles + ", rents=" + rents + "]";
 	}
-	
+
 }

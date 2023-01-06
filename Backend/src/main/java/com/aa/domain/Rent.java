@@ -42,6 +42,13 @@ public class Rent {
 	
 	public Rent() {}
 
+	public Rent(Date startDate, Date endDate, Car car, User user) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.car = car;
+		this.user = user;
+	}
+
 	public Integer getId() {
 		return id;
 	}

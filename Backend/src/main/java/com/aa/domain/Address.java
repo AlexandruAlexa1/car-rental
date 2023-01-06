@@ -45,6 +45,14 @@ public class Address {
 	
 	public Address() {}
 
+	public Address(String city, String state, String country, String postalCode, String phoneNumber) {
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.postalCode = postalCode;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -92,6 +100,10 @@ public class Address {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", city=" + city + ", state=" + state + ", country=" + country + ", postalCode="
+				+ postalCode + ", phoneNumber=" + phoneNumber + "]";
+	}
 }
