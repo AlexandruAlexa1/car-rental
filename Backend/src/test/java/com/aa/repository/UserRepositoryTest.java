@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.aa.domain.Address;
@@ -34,16 +32,11 @@ public class UserRepositoryTest {
 	
 	@BeforeEach
 	void init() {
-		String password = "password";
-
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(password);
-		
 		Address address_1 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		Address address_2 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		
-		user_1 = new User("admin@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
-		user_2 = new User("user@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
+		user_1 = new User("admin@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
+		user_2 = new User("user@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
 	}
 	
 	@Test

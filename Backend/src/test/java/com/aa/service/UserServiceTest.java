@@ -20,8 +20,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.aa.domain.Address;
 import com.aa.domain.Role;
@@ -43,16 +41,11 @@ public class UserServiceTest {
 	
 	@BeforeEach
 	void init() {
-		String password = "password";
-
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(password);
-		
 		Address address_1 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		Address address_2 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		
-		user_1 = new User("admin@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
-		user_2 = new User("user@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
+		user_1 = new User("admin@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
+		user_2 = new User("user@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
 	}
 	
 	@Test
@@ -123,23 +116,3 @@ public class UserServiceTest {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

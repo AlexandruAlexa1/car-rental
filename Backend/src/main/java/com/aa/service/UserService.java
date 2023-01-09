@@ -2,6 +2,7 @@ package com.aa.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,9 @@ public class UserService {
 	}
 	
 	public void delete(Integer id) throws UserNotFoundException {
-		if (!repo.existsById(id)) {
+		Optional<User> findedUser = repo.findById(id);
+		
+		if (findedUser.isEmpty()) {
 			throw new UserNotFoundException("Could not find any user with id: " + id);
 		}
 		
