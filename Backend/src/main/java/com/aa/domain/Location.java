@@ -26,8 +26,17 @@ public class Location {
 	@OneToMany(mappedBy = "location")
 	private List<Car> cars;
 	
-	public Location() {
-		
+	public Location() {}
+	
+	public Location(Integer id) {
+		this.id = id;
+	}
+
+	public Location(String address, String phoneNumber, String email, List<Car> cars) {
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.cars = cars;
 	}
 
 	public Integer getId() {

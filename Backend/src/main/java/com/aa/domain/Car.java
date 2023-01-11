@@ -1,5 +1,7 @@
 package com.aa.domain;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cars")
@@ -29,28 +31,28 @@ public class Car {
 	private Integer id;
 
 	@Column(nullable = false)
-	@NotBlank(message = "Mark is required")
+	@NotNull(message = "Mark is required")
 	private String brand;
 
 	@Column(nullable = false)
-	@NotBlank(message = "Model is required")
+	@NotNull(message = "Model is required")
 	private String model;
 
 	@Column(nullable = false)
-	@NotBlank(message = "Year is required")
+	@NotNull(message = "Year is required")
 	private Integer year;
 
 	@Column(nullable = false)
-	@NotBlank(message = "Color is required")
+	@NotNull(message = "Color is required")
 	private String color;
-	
+
 	@Column(nullable = false)
-	@NotBlank(message = "Seat count is required")
+	@NotNull(message = "Seat count is required")
 	private Integer seatCount;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	@NotBlank(message = "Fuel type is required")
+	@NotNull(message = "Fuel type is required")
 	private FuelType fuelType;
 
 	@Min(value = 0, message = "The price cannot be less than 0")
@@ -59,16 +61,56 @@ public class Car {
 	private boolean available;
 
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-	private Set<Image> images;
+	private Set<Image> images = new HashSet<>();
 
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-	private List<Rent> rents;
+	private List<Rent> rents = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 
 	public Car() {
+	}
+
+	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
+			Double pricePerDay, boolean available, Set<Image> images, List<Rent> rents, Location location) {
+		this.brand = brand;
+		this.model = model;
+		this.year = year;
+		this.color = color;
+		this.seatCount = seatCount;
+		this.fuelType = fuelType;
+		this.pricePerDay = pricePerDay;
+		this.available = available;
+		this.images = images;
+		this.rents = rents;
+		this.location = location;
+	}
+	
+	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
+			Double pricePerDay, boolean available) {
+		this.brand = brand;
+		this.model = model;
+		this.year = year;
+		this.color = color;
+		this.seatCount = seatCount;
+		this.fuelType = fuelType;
+		this.pricePerDay = pricePerDay;
+		this.available = available;
+	}
+	
+	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
+			Double pricePerDay, boolean available, Rent rent) {
+		this.brand = brand;
+		this.model = model;
+		this.year = year;
+		this.color = color;
+		this.seatCount = seatCount;
+		this.fuelType = fuelType;
+		this.pricePerDay = pricePerDay;
+		this.available = available;
+		this.rents.add(rent);
 	}
 
 	public Integer getId() {
@@ -169,9 +211,7 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", color=" + color
-				+ ", pricePerDay=" + pricePerDay + ", available=" + available + ", images=" + images + ", rents="
-				+ rents + ", location=" + location + "]";
+		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", color=" + color + "]";
 	}
 	
 }
