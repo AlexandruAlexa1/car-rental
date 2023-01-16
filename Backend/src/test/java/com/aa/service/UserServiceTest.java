@@ -24,7 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.aa.domain.Address;
 import com.aa.domain.Role;
 import com.aa.domain.User;
-import com.aa.exception.UserNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,7 +71,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	void get() throws UserNotFoundException {
+	void get() throws NotFoundException {
 		Integer id = 1;
 		
 		when(repo.findById(anyInt())).thenReturn(Optional.of(user_1));
@@ -91,7 +91,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	void delete() throws UserNotFoundException {
+	void delete() throws NotFoundException {
 		Integer id = 1;
 		
 		when(repo.existsById(anyInt())).thenReturn(true);
@@ -104,7 +104,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	void deleteForException() throws UserNotFoundException {
+	void deleteForException() throws NotFoundException {
 		when(repo.existsById(1)).thenReturn(false);
 		
 		doNothing().when(repo).deleteById(anyInt());

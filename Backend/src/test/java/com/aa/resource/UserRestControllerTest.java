@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.aa.domain.Address;
 import com.aa.domain.Role;
 import com.aa.domain.User;
-import com.aa.exception.UserNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -79,7 +79,7 @@ public class UserRestControllerTest {
 	void getUser_UserNotFound() throws Exception {
 		Integer id = 10;
 
-		when(service.get(id)).thenThrow(new UserNotFoundException());
+		when(service.get(id)).thenThrow(new NotFoundException());
 		
 		mockMvc.perform(get(URI + "/{id}", id))
 			.andExpect(status().isNotFound());
@@ -124,7 +124,7 @@ public class UserRestControllerTest {
 	void testDelete_UserNotFound() throws Exception {
 	    Integer id = 10;
 
-	    doThrow(new UserNotFoundException()).when(service).delete(id);
+	    doThrow(new NotFoundException()).when(service).delete(id);
 
 	    mockMvc.perform(delete(URI + "/{id}", id))
 	        .andExpect(status().isNotFound());

@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import com.aa.domain.Address;
 import com.aa.domain.Role;
 import com.aa.domain.User;
-import com.aa.exception.UserNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.repository.UserRepository;
 import com.aa.service.UserService;
 
@@ -91,9 +91,9 @@ public class UserRestControllerIntegrationTest {
 	}
 	
 	@Test
-	@Description("It should throw UserNotFoundException is user not found")
-	void get_UserNotFoundException() {
-		assertThrows(UserNotFoundException.class, () -> service.get(10));
+	@Description("It should throw NotFoundException is user not found")
+	void get_NotFoundException() {
+		assertThrows(NotFoundException.class, () -> service.get(10));
 	}
 	
 	@Test
@@ -120,9 +120,9 @@ public class UserRestControllerIntegrationTest {
 	}
 	
 	@Test
-	@Description("It should throw UserNotFoundException is user not found")
-	void delete_UserNotFoundException() {
-		assertThrows(UserNotFoundException.class, () -> service.delete(10));
+	@Description("It should throw NotFoundException is user not found")
+	void delete_NotFoundException() {
+		assertThrows(NotFoundException.class, () -> service.delete(10));
 	}
 	
 	@Test

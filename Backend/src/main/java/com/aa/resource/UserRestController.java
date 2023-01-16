@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aa.domain.User;
-import com.aa.exception.UserNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.service.UserService;
 
 import jakarta.validation.Valid;
@@ -40,7 +40,7 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> get(@PathVariable("id") Integer id) throws UserNotFoundException {
+	public ResponseEntity<User> get(@PathVariable("id") Integer id) throws NotFoundException {
 		return new ResponseEntity<>(service.get(id), HttpStatus.OK);
 	}
 	
@@ -59,7 +59,7 @@ public class UserRestController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Integer id) throws UserNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) throws NotFoundException {
 		service.delete(id);
 		
 		return ResponseEntity.noContent().build();

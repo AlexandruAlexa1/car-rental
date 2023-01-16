@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.aa.domain.Car;
 import com.aa.enums.FuelType;
-import com.aa.exception.CarNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.repository.CarRepository;
 
 @Service
@@ -38,19 +38,19 @@ public class CarService {
 		return repo.save(car);
 	}
 	
-	public Car get(Integer id) throws CarNotFoundException {
+	public Car get(Integer id) throws NotFoundException {
 		try {
 			return repo.findById(id).get();
 		} catch (NoSuchElementException e) {
-			throw new CarNotFoundException("Could not find any car with id: " + id);
+			throw new NotFoundException("Could not find any car with id: " + id);
 		}
 	}
 	
-	public void delete(Integer id) throws CarNotFoundException {
+	public void delete(Integer id) throws NotFoundException {
 		Optional<Car> car = repo.findById(id);
 		
 		if (car.isEmpty()) {
-			throw new CarNotFoundException("Could not find any car with id: " + id);
+			throw new NotFoundException("Could not find any car with id: " + id);
 		}
 		
 		repo.deleteById(id);

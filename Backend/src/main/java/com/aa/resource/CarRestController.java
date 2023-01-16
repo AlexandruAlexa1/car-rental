@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aa.domain.Car;
 import com.aa.enums.FuelType;
-import com.aa.exception.CarNotFoundException;
+import com.aa.exception.NotFoundException;
 import com.aa.exception.InvalidFuelTypeException;
 import com.aa.service.CarService;
 
@@ -93,7 +93,7 @@ public class CarRestController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Car> get(@PathVariable("id") Integer id) throws CarNotFoundException {
+	public ResponseEntity<Car> get(@PathVariable("id") Integer id) throws NotFoundException {
 		return new ResponseEntity<>(service.get(id), HttpStatus.OK);
 	}
 	
@@ -103,7 +103,7 @@ public class CarRestController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") Integer id) throws CarNotFoundException {
+	public ResponseEntity<?> delete(@PathVariable("id") Integer id) throws NotFoundException {
 		service.delete(id);
 		
 		return ResponseEntity.noContent().build();
