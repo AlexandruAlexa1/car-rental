@@ -33,7 +33,6 @@ public class Rent {
 
 	@ManyToOne
 	@JoinColumn(name = "car_id")
-//	@JsonManagedReference
 	private Car car;
 
 	@ManyToOne

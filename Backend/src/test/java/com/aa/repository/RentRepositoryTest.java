@@ -1,8 +1,10 @@
 package com.aa.repository;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.time.LocalDate;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,17 +23,13 @@ public class RentRepositoryTest {
 
 	@Autowired private RentRepository repo;
 	
-	Rent rent_1;
-	Rent rent_2;
-	
-	@BeforeEach
-	public void init() {
-		rent_1 = new Rent(LocalDate.now(), LocalDate.now().plusDays(10), new Car(), new User(1));
-		rent_2 = new Rent(LocalDate.now(), LocalDate.now().plusDays(10), new Car(), new User(1));
-	}
-	
 	@Test
 	void save() {
-		repo.save(rent_1);
+		Rent rent = new Rent(LocalDate.now(), LocalDate.now().plusDays(10), new Car(1), new User(1));
+
+		Rent savedRent = repo.save(rent);
+		
+		assertNotNull(savedRent);
+		assertThat(savedRent.getId()).isGreaterThan(0);
 	}
 }
