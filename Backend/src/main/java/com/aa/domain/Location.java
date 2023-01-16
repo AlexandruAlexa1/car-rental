@@ -1,5 +1,6 @@
 package com.aa.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -24,7 +25,8 @@ public class Location {
 	private String email;
 	
 	@OneToMany(mappedBy = "location")
-	private List<Car> cars;
+//	@JsonBackReference
+	private List<Car> cars = new ArrayList<>();
 	
 	public Location() {}
 	

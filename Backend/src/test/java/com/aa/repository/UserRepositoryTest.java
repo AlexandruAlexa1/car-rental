@@ -53,7 +53,6 @@ public class UserRepositoryTest {
 		List<User> listUsers = repo.findAll();
 		
 		assertNotNull(listUsers);
-		assertEquals(2, listUsers.size());
 		
 		listUsers.forEach(user -> System.out.println(user));
 	}

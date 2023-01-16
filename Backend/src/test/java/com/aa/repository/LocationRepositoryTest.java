@@ -1,8 +1,10 @@
 package com.aa.repository;
 
-import java.time.LocalDate;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -10,28 +12,22 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
-import com.aa.domain.Car;
-import com.aa.domain.Rent;
-import com.aa.domain.User;
+import com.aa.domain.Location;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
-public class RentRepositoryTest {
+public class LocationRepositoryTest {
 
-	@Autowired private RentRepository repo;
-	
-	Rent rent_1;
-	Rent rent_2;
-	
-	@BeforeEach
-	public void init() {
-		rent_1 = new Rent(LocalDate.now(), LocalDate.now().plusDays(10), new Car(), new User(1));
-		rent_2 = new Rent(LocalDate.now(), LocalDate.now().plusDays(10), new Car(), new User(1));
-	}
+	@Autowired private LocationRepository repo;
 	
 	@Test
 	void save() {
-		repo.save(rent_1);
+		Location location = new Location("Address", "Phone Number", "E-mail", new ArrayList<>());
+		
+		Location savedLocation = repo.save(location);
+		
+		assertNotNull(savedLocation);
+		assertThat(savedLocation.getId()).isGreaterThan(0);
 	}
 }

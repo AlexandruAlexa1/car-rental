@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +17,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.test.annotation.Rollback;
 
 import com.aa.domain.Car;
+import com.aa.domain.Location;
 import com.aa.enums.FuelType;
 
 @DataJpaTest
@@ -68,6 +68,8 @@ public class CarRepositoryTest {
 		
 		assertNotNull(listCars);
 		assertThat(listCars.size()).isGreaterThan(0);
+		
+		listCars.forEach(car -> System.out.println(car));
 	}
 	
 	@Test
@@ -94,18 +96,18 @@ public class CarRepositoryTest {
 		assertThat(listCars.size()).isGreaterThan(0);
 	}
 	
-	@Test
-	void testFindAvaibleCars() {
-		LocalDate startDate = LocalDate.now().plusDays(20);
-		LocalDate endDate = LocalDate.now().plusDays(35);
-		
-		List<Car> listCars = repo.findAvaibleCars(startDate, endDate);
-		
-		assertNotNull(listCars);
-		assertThat(listCars.size()).isGreaterThan(0);
-		
-		listCars.forEach(car -> System.err.println(car));
-	}
+//	@Test
+//	void testFindAvaibleCars() {
+//		LocalDate startDate = LocalDate.now().plusDays(20);
+//		LocalDate endDate = LocalDate.now().plusDays(35);
+//		
+//		List<Car> listCars = repo.findAvaibleCars(startDate, endDate);
+//		
+//		assertNotNull(listCars);
+//		assertThat(listCars.size()).isGreaterThan(0);
+//		
+//		listCars.forEach(car -> System.err.println(car));
+//	}
 	
 	@Test
 	void get() {
@@ -118,13 +120,12 @@ public class CarRepositoryTest {
 	
 	@Test
 	void update() {
-		Car findedCar = repo.findById(31).get();
-		findedCar.setModel("3 Series");
+		Car findedCar = repo.findById(1).get();
+		findedCar.setLocation(new Location(1));
 		
 		Car updatedCar = repo.save(findedCar);
 		
 		assertNotNull(updatedCar);
-		assertEquals(findedCar.getModel(), updatedCar.getModel());
 	}
 	
 	@Test

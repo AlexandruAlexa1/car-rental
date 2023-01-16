@@ -8,10 +8,11 @@ import java.util.Set;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -64,15 +65,22 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+	@ManyToMany
+	@JoinTable(
+		name = "users_roles", 
+		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
 	@OneToMany(mappedBy = "user")
+	@JsonBackReference
 	private List<Rent> rents = new ArrayList<>();
 
 	public User() {}
+
+	public User(Integer id) {
+		this.id = id;
+	}
 
 	public User(String email, String password, String firstName, String lastName, Date joinDate, Date lastLoginDate,
 			boolean isEnabled, boolean isNotLocked, Address address, Role role) {
@@ -187,7 +195,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", address=" + address + ", roles=" + roles + ", rents=" + rents + "]";
+				+ ", lastName=" + lastName + ", joinDate=" + joinDate + ", lastLoginDate=" + lastLoginDate
+				+ ", isEnabled=" + isEnabled + ", isNotLocked=" + isNotLocked + ", address=" + address + ", roles="
+				+ roles + "]";
 	}
-
 }

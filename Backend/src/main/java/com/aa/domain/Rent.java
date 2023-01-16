@@ -33,6 +33,7 @@ public class Rent {
 
 	@ManyToOne
 	@JoinColumn(name = "car_id")
+//	@JsonManagedReference
 	private Car car;
 
 	@ManyToOne
@@ -41,7 +42,7 @@ public class Rent {
 
 	public Rent() {
 	}
-	
+
 	public Rent(Integer id) {
 		this.id = id;
 	}
@@ -95,6 +96,7 @@ public class Rent {
 
 	@Override
 	public String toString() {
-		return "Rent [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", car=" + car + "]";
+		return "Rent [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", car=" + car + ", user="
+				+ user + "]";
 	}
 }

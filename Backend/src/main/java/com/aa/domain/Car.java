@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.aa.enums.FuelType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +26,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cars")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Car {
 
 	@Id
@@ -31,7 +34,7 @@ public class Car {
 	private Integer id;
 
 	@Column(nullable = false)
-	@NotNull(message = "Mark is required")
+	@NotNull(message = "Brand is required")
 	private String brand;
 
 	@Column(nullable = false)
@@ -63,18 +66,22 @@ public class Car {
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<>();
 
-	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-	private List<Rent> rents = new ArrayList<>();
-
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
 
+	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+	private List<Rent> rents = new ArrayList<>();
+
 	public Car() {
 	}
 
+	public Car(Integer id) {
+		this.id = id;
+	}
+
 	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
-			Double pricePerDay, boolean available, Set<Image> images, List<Rent> rents, Location location) {
+			Double pricePerDay, boolean available, Set<Image> images, Location location) {
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
@@ -84,33 +91,7 @@ public class Car {
 		this.pricePerDay = pricePerDay;
 		this.available = available;
 		this.images = images;
-		this.rents = rents;
 		this.location = location;
-	}
-	
-	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
-			Double pricePerDay, boolean available) {
-		this.brand = brand;
-		this.model = model;
-		this.year = year;
-		this.color = color;
-		this.seatCount = seatCount;
-		this.fuelType = fuelType;
-		this.pricePerDay = pricePerDay;
-		this.available = available;
-	}
-	
-	public Car(String brand, String model, Integer year, String color, Integer seatCount, FuelType fuelType,
-			Double pricePerDay, boolean available, Rent rent) {
-		this.brand = brand;
-		this.model = model;
-		this.year = year;
-		this.color = color;
-		this.seatCount = seatCount;
-		this.fuelType = fuelType;
-		this.pricePerDay = pricePerDay;
-		this.available = available;
-		this.rents.add(rent);
 	}
 
 	public Integer getId() {
@@ -193,14 +174,6 @@ public class Car {
 		this.images = images;
 	}
 
-	public List<Rent> getRents() {
-		return rents;
-	}
-
-	public void setRents(List<Rent> rents) {
-		this.rents = rents;
-	}
-
 	public Location getLocation() {
 		return location;
 	}
@@ -209,9 +182,18 @@ public class Car {
 		this.location = location;
 	}
 
+	public List<Rent> getRents() {
+		return rents;
+	}
+
+	public void setRents(List<Rent> rents) {
+		this.rents = rents;
+	}
+
 	@Override
 	public String toString() {
-		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", color=" + color + "]";
+		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", color=" + color
+				+ ", seatCount=" + seatCount + ", fuelType=" + fuelType + ", pricePerDay=" + pricePerDay
+				+ ", available=" + available + ", images=" + images + "]";
 	}
-	
 }
