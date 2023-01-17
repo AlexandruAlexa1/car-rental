@@ -25,7 +25,6 @@ public class Location {
 	private String email;
 	
 	@OneToMany(mappedBy = "location")
-//	@JsonBackReference
 	private List<Car> cars = new ArrayList<>();
 	
 	public Location() {}
