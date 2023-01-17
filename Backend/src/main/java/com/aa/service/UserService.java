@@ -1,20 +1,38 @@
 package com.aa.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.aa.domain.User;
+import com.aa.domain.UserPrincipal;
 import com.aa.exception.NotFoundException;
 import com.aa.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
 	@Autowired private UserRepository repo;
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User user = repo.findByEmail(email);
+		
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found by E-mail: " + email);
+		}
+		
+		user.setLastLoginDate(new Date());
+		
+		return new UserPrincipal(user);
+	}
 	
 	public List<User> findAll() {
 		return repo.findAll();
