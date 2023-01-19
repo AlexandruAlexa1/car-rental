@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 
 import com.aa.domain.Address;
@@ -26,17 +27,21 @@ import com.aa.domain.User;
 public class UserRepositoryTest {
 
 	@Autowired private UserRepository repo;
+	@Autowired private PasswordEncoder passwordEncoder;
 	
 	private User user_1;
 	private User user_2;
 	
 	@BeforeEach
 	void init() {
+		String password = "0000";
+		String encodedPassword = passwordEncoder.encode(password);
+		
 		Address address_1 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		Address address_2 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		
-		user_1 = new User("admin@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
-		user_2 = new User("user@yahoo.com", "password", "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
+		user_1 = new User("admin11@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
+		user_2 = new User("user@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
 	}
 	
 	@Test
@@ -93,7 +98,7 @@ public class UserRepositoryTest {
 	
 	@Test
 	void findByEmail() {
-		String email = "admin@yahoo.com";
+		String email = "admin11@yahoo.com";
 		
 		User findedUser = repo.findByEmail(email);
 		
