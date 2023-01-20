@@ -1,10 +1,12 @@
 package com.aa.utility;
 
-import static com.aa.constant.SecurityConstant.*;
+import static com.aa.constant.SecurityConstant.AUTHORITIES;
+import static com.aa.constant.SecurityConstant.ISSUER;
+import static com.aa.constant.SecurityConstant.JWT_SECRET;
+import static com.aa.constant.SecurityConstant.TOKEN_CANNOT_BE_VERIFIED;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
@@ -71,9 +74,9 @@ public class TokenVerifier {
 		return verifyToken.verify(token).getClaim(AUTHORITIES).asArray(String.class);
 	}
 	
-	public Authentication buildAuthenticationToken(String email, List<GrantedAuthority> authorities, HttpServletRequest request) {
+	public Authentication buildAuthenticationToken(String email, Set<GrantedAuthority> grantedAuthorities, HttpServletRequest request) {
 		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(email, request, authorities);
+				new UsernamePasswordAuthenticationToken(email, request, grantedAuthorities);
 		
 		setAuthenticationDetails(authenticationToken, request);
 		
@@ -83,5 +86,14 @@ public class TokenVerifier {
 	private void setAuthenticationDetails(UsernamePasswordAuthenticationToken authenticationToken,
 			HttpServletRequest request) {
 		authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+	}
+	
+	public void verifyTokenAndBuildAuthentication(String email, String token, HttpServletRequest request) {
+		if (isTokenValid(email, token)) {
+			Set<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(token);
+			buildAuthenticationToken(email, grantedAuthorities, request);
+		} else {
+			SecurityContextHolder.clearContext();
+		}
 	}
 }
