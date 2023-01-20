@@ -14,8 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.aa.constant.SecurityConstant;
+import com.aa.filter.JWTAccessDeniedHandler;
+import com.aa.filter.JWTAuthorizationFilter;
+import com.aa.filter.JWTForbiddenEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +27,9 @@ public class SecurityConfiguration {
 
 	@Autowired private UserDetailsService userDetailsService;
 	@Autowired private PasswordEncoder passwordEncoder;
+	@Autowired private JWTAuthorizationFilter jwtAuthorizationFilter;
+	@Autowired private JWTAccessDeniedHandler accessDeniedHandler;
+	@Autowired private JWTForbiddenEntryPoint jwtForbiddenEntryPoint;
 	
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
@@ -45,11 +52,14 @@ public class SecurityConfiguration {
 			.authorizeHttpRequests()
 			.requestMatchers(SecurityConstant.PUBLIC_URLS).permitAll()
 			.anyRequest().authenticated()
-//			.and()
-//			.httpBasic()
+			.and()
+			.exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+			.and()
+			.exceptionHandling().authenticationEntryPoint(jwtForbiddenEntryPoint)
 			.and()
 			.authenticationManager(authenticationManager())
-			.authenticationProvider(authenticationProvider());
+			.authenticationProvider(authenticationProvider())
+			.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 	 	
 	 	return http.build();
 	}
