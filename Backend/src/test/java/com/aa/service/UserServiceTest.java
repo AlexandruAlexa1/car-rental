@@ -24,6 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.aa.domain.Address;
 import com.aa.domain.Role;
 import com.aa.domain.User;
+import com.aa.exception.DuplicateEmailException;
 import com.aa.exception.NotFoundException;
 import com.aa.repository.UserRepository;
 
@@ -61,7 +62,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	void save() {
+	void save() throws DuplicateEmailException {
 		when(repo.save(any(User.class))).thenReturn(user_1);
 		
 		User savedUser = service.save(user_1);
