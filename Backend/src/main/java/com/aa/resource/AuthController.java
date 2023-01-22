@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aa.constant.SecurityConstant;
 import com.aa.domain.AuthRequest;
 import com.aa.domain.JWT;
+import com.aa.domain.User;
 import com.aa.domain.UserPrincipal;
+import com.aa.exception.DuplicateEmailException;
 import com.aa.exception.NotFoundException;
 import com.aa.service.UserService;
 import com.aa.utility.TokenProvider;
@@ -49,4 +51,8 @@ public class AuthController {
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
 	}
 	
+	@PostMapping("/register")
+	public ResponseEntity<User> register(@RequestBody @Valid User user) throws DuplicateEmailException {
+		return new ResponseEntity<>(userService.register(user), HttpStatus.OK);
+	}
 }

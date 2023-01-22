@@ -9,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.aa.domain.Role;
 import com.aa.domain.User;
 import com.aa.domain.UserPrincipal;
+import com.aa.exception.DuplicateEmailException;
 import com.aa.exception.NotFoundException;
 import com.aa.repository.UserRepository;
 
@@ -20,6 +23,7 @@ import com.aa.repository.UserRepository;
 public class UserService implements UserDetailsService {
 
 	@Autowired private UserRepository repo;
+	@Autowired private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -67,5 +71,32 @@ public class UserService implements UserDetailsService {
 		
 		repo.deleteById(id);
 	}
-	
+
+	public User register(User user) throws DuplicateEmailException {
+		checkDuplicateEmail(user.getEmail());
+		encodePassword(user);
+		setUserDetails(user);
+		
+		return repo.save(user);
+	}
+
+	private void setUserDetails(User user) {
+		user.setJoinDate(new Date());
+		user.setEnabled(true);
+		user.setNotLocked(true);
+		user.getRoles().add(new Role(2));
+	}
+
+	private void encodePassword(User user) {
+		String password = passwordEncoder.encode(user.getPassword());
+		user.setPassword(password);
+	}
+
+	private void checkDuplicateEmail(String email) throws DuplicateEmailException {
+		User userInDB = repo.findByEmail(email);
+		
+		if (userInDB != null) {
+			throw new DuplicateEmailException("This E-mail: " + email + " already exist. Please choose another E-mail!");
+		}
+	}
 }

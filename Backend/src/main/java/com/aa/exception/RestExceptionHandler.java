@@ -51,6 +51,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
 	}
+	
+	@ExceptionHandler
+	public ResponseEntity<HttpResponse> handleDuplicateEmailException (DuplicateEmailException ex) {
+		HttpResponse response = new HttpResponse(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+		
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,

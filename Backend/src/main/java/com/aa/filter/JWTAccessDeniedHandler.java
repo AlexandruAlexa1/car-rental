@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JWTAccessDeniedHandler implements AccessDeniedHandler {
 
-	private static final String ACCESS_DENIED = "Access denied. You need to login to access this resource";
+	private static final String ACCESS_DENIED = "Access denied. You do not have sufficient permissions to access this resource";
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
