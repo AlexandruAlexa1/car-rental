@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.aa.domain.User;
+import com.aa.exception.DuplicateEmailException;
 import com.aa.exception.NotFoundException;
 import com.aa.service.UserService;
 
@@ -45,7 +46,7 @@ public class UserRestController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> add(@RequestBody @Valid User user) {
+	public ResponseEntity<User> add(@RequestBody @Valid User user) throws DuplicateEmailException {
 		User savedUser = service.save(user);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();

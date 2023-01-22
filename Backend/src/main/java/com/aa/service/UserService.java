@@ -42,10 +42,42 @@ public class UserService implements UserDetailsService {
 		return repo.findAll();
 	}
 	
-	public User save(User user) {
-		return repo.save(user);
+	public User save(User userInForm) throws DuplicateEmailException {
+		boolean isEditMode = userInForm.getId() != null;
+		
+		if (isEditMode) {
+			User userInDB = repo.findById(userInForm.getId()).get();
+			
+			checkEmail(userInForm, userInDB);
+			checkPassword(userInForm, userInDB);
+		}
+		
+		checkDuplicateEmail(userInForm.getEmail());
+		encodePassword(userInForm);
+		
+		return repo.save(userInForm);
 	}
 	
+	private void checkPassword(User userInForm, User userInDB) {
+		boolean isPasswordEmptry = userInForm.getPassword() == null;
+		
+		if (isPasswordEmptry) {
+			userInForm.setPassword(userInDB.getPassword());
+		}
+		
+		encodePassword(userInForm);
+	}
+
+	private void checkEmail(User userInForm, User userInDB) throws DuplicateEmailException {
+		boolean isTheSameEmail = userInDB.getEmail().contentEquals(userInDB.getEmail());
+		
+		if (isTheSameEmail) {
+			userInForm.setEmail(userInDB.getEmail());
+		}
+		
+		checkDuplicateEmail(userInForm.getEmail());
+	}
+
 	public User get(Integer id) throws NotFoundException {
 		try {
 			return repo.findById(id).get();
