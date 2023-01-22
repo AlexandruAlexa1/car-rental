@@ -55,7 +55,7 @@ public class UserRestController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<User> update(@RequestBody @Valid User user) {
+	public ResponseEntity<User> update(@RequestBody @Valid User user) throws DuplicateEmailException {
 		return new ResponseEntity<>(service.save(user), HttpStatus.OK);
 	}
 	
