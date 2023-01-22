@@ -91,7 +91,10 @@ public class TokenVerifier {
 	public void verifyTokenAndBuildAuthentication(String email, String token, HttpServletRequest request) {
 		if (isTokenValid(email, token)) {
 			Set<GrantedAuthority> grantedAuthorities = getGrantedAuthorities(token);
-			buildAuthenticationToken(email, grantedAuthorities, request);
+			
+			Authentication authentication = buildAuthenticationToken(email, grantedAuthorities, request);
+			
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 		} else {
 			SecurityContextHolder.clearContext();
 		}

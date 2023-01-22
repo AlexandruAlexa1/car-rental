@@ -1,12 +1,11 @@
 package com.aa.filter;
 
-import static com.aa.constant.SecurityConstant.AUTHORIZATION;
-import static com.aa.constant.SecurityConstant.JWT_PREFIX;
-import static com.aa.constant.SecurityConstant.OPTIONS_HTTP_METHOD;
+import static com.aa.constant.SecurityConstant.*;
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -36,18 +35,27 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		
 		if (isOptionsMethod(request)) {
 			response.setStatus(HttpStatus.OK.value());
+		} else if (!isPublicRoute(request)) {
+			String token = getTokenFromHeader(request);
+			String email = tokenVerifier.getSubject(token);
+			
+			tokenVerifier.verifyTokenAndBuildAuthentication(email, token, request);
 		}
-		
-		String token = getTokenFromHeader(request);
-		String email = tokenVerifier.getSubject(token);
-		
-		tokenVerifier.verifyTokenAndBuildAuthentication(email, token, request);
 			
 		filterChain.doFilter(request, response);
 	}
+	
+	private boolean isPublicRoute(HttpServletRequest request) {
+		for (String publicUrl : PUBLIC_URLS) {
+			if (request.getServletPath().startsWith(publicUrl)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private String getTokenFromHeader(HttpServletRequest request) {
-		String authorizationHeader = request.getHeader(AUTHORIZATION);
+		String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 		
 		if (authorizationHeader == null || !authorizationHeader.startsWith(JWT_PREFIX)) {
 			return null;

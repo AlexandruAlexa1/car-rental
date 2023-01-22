@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +35,21 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		HttpResponse respone = new HttpResponse(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 		
 		return new ResponseEntity<>(respone, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<HttpResponse> handleBadCredentialsException(BadCredentialsException ex) {
+		HttpResponse response = new HttpResponse(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.value(),
+				ex.getMessage());
+		
+		return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<HttpResponse> handleAuthenticationCredentialsNotFoundException (AuthenticationCredentialsNotFoundException ex) {
+		HttpResponse response = new HttpResponse(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.value(), ex.getMessage());
+		
+		return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
 	}
 
 	@Override

@@ -50,6 +50,14 @@ public class UserService implements UserDetailsService {
 		}
 	}
 	
+	public User findByEmail(String email) throws NotFoundException {
+		try {
+			return repo.findByEmail(email);
+		} catch (NoSuchElementException e) {
+			throw new NotFoundException("Could not find any user with email: " + email);
+		}
+	}
+	
 	public void delete(Integer id) throws NotFoundException {
 		Optional<User> findedUser = repo.findById(id);
 		
@@ -59,4 +67,5 @@ public class UserService implements UserDetailsService {
 		
 		repo.deleteById(id);
 	}
+	
 }
