@@ -9,6 +9,10 @@ public class JWT {
 	private String jwt;
 	
 	private Instant expirantionDate;
+	
+	public JWT() {
+		
+	}
 
 	public JWT(String jwt) {
 		this.jwt = jwt;
@@ -29,5 +33,10 @@ public class JWT {
 
 	public void setExpirantionDate(Instant expirantionDate) {
 		this.expirantionDate = expirantionDate;
+	}
+
+	@Override
+	public String toString() {
+		return "JWT [jwt=" + jwt + ", expirantionDate=" + expirantionDate + "]";
 	}
 }
