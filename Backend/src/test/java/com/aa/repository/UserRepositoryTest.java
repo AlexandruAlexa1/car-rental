@@ -41,7 +41,7 @@ public class UserRepositoryTest {
 		Address address_2 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		
 		user_1 = new User("admin11@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
-		user_2 = new User("user@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
+		user_2 = new User("user11@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
 	}
 	
 	@Test

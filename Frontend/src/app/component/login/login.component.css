@@ -1,0 +1,137 @@
+.login-form-wrapper {
+    width: 90rem;
+    height: 55rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.login-form-wrapper::before {
+    content: "";
+    width: 100%;
+    height: 0.7rem;
+    position: absolute;
+    top: -0.7rem;
+    left: 0;
+    transform: skewX(45deg);
+    transform-origin: bottom;
+    background-color: #111;
+    /* box-shadow: -0.5rem -1.2rem 0.2rem #000; */
+}
+
+.login-form-wrapper::after {
+    content: "";
+    height: 100%;
+    width: 0.7rem;
+    position: absolute;
+    top: 0;
+    left: -0.7rem;
+    transform: skewY(45deg);
+    transform-origin: right;
+    background-color: #111;
+    /* box-shadow: -1.6rem 0.5rem 0.2rem #000; */
+}
+
+.left-side {
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.left-side img {
+    width: 100%;
+    height: 100%;
+}
+
+.left-side div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+}
+
+.left-side div h5 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: .2rem;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+}
+
+.left-side div a {
+    border: .1rem solid #fff;
+    color: #fff;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: .5rem;
+    transition: all .3s;
+}
+
+.left-side div a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.login-form {
+    width: 50%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding: 0 4rem;
+}
+
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    letter-spacing: .2rem;
+    margin-bottom: 1rem;
+}
+
+.input-group input {
+    background: transparent;
+    border: none;
+    border-bottom: .1rem solid #fff;
+    outline: none;
+    color: #fff;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: .1rem solid #fff;
+    text-transform: uppercase;
+    letter-spacing: .5rem;
+    padding: .2rem 0;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.submit-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.submit-btn:disabled {
+    opacity: 0.9;
+    cursor: not-allowed;
+    background: none;
+    color: #fff;
+}

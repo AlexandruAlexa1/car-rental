@@ -1,0 +1,28 @@
+<div class="login-form-wrapper">
+    <div class="left-side">
+        <img src="https://images.unsplash.com/photo-1635857605025-def0c23efc29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+        <div>
+            <h5>D'not have an accout?</h5>
+            <a routerLink="/register">Sign up</a>
+        </div>
+    </div>
+    <form class="login-form" #loginForm="ngForm" (submit)="onLogin(loginForm.value)">
+        <div class="input-group">
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" required ngModel #email="ngModel">
+            <div class="validation-error" *ngIf="email.invalid && email.touched">
+                E-mail is required!
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" required ngModel #password="ngModel">
+            <div class="validation-error" *ngIf="password.invalid && password.touched">
+                Password is required!
+            </div>
+        </div>
+    
+        <input type="submit" value="Login" class="submit-btn" [disabled]="loginForm.invalid">
+    </form>
+</div>
+

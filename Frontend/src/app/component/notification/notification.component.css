@@ -1,0 +1,35 @@
+.notification {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: aqua;
+    font-size: 1.5rem;
+    font-family: Roboto;
+    letter-spacing: .2rem;
+    padding: 0.5rem 2rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem #000;
+    font-weight: bolder;
+    display: none;
+    animation: notification .5s forwards;
+}
+
+@keyframes notification {
+    100% { top: 0; }
+}
+
+.info {
+    background-color: aqua;
+}
+
+.warning {
+    background-color: yellow;
+}
+
+.error {
+    background-color: red;
+}
+
+.success {
+    background-color: greenyellow;
+}
