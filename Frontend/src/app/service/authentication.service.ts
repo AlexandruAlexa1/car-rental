@@ -11,8 +11,8 @@ import { Jwt } from '../domain/jwt';
 export class AuthenticationService {
 
   private jwtHelperService = new JwtHelperService();
-  private loggedUser: string | null;
-  private token: string | null;
+  loggedUser: string | null;
+  token: string | null;
   host = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) { }

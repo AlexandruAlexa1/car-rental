@@ -1,0 +1,187 @@
+<div class="form-wrapper">
+    <div class="left-side">
+        <img src="https://images.unsplash.com/photo-1587135991058-8816b028691f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80">
+        <div>
+            <h5>Already have an account?</h5>
+            <a routerLink="/login">Sign In</a>
+        </div>
+    </div>
+
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" formControlName="email">
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="validation-error">
+                <div *ngIf="registerForm.get('email')?.errors?.['required']">
+                    E-mail is required.
+                </div>
+
+                <div *ngIf="registerForm.get('email')?.errors?.['minlenght']">
+                    E-mail must be at least 5 characters long.
+                </div>
+
+                <div *ngIf="registerForm.get('email')?.errors?.['maxlenght']">
+                    E-mail must have maximum 125 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" formControlName="password">
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="validation-error">
+                <div *ngIf="registerForm.get('password')?.errors?.['required']">
+                    Password is required.
+                </div>
+
+                <div *ngIf="registerForm.get('password')?.errors?.['minlenght']">
+                    Password be at least 5 characters long.
+                </div>
+
+                <div *ngIf="registerForm.get('password')?.errors?.['maxlenght']">
+                    Password must have maximum 64 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Repeat Password:</label>
+            <input type="password" name="repeatPassword" formControlName="repeatPassword">
+            <div *ngIf="registerForm.get('repeatPassword')?.invalid && registerForm.get('repeatPassword')?.touched" class="validation-error">
+                <div *ngIf="registerForm.errors?.['notSame']">
+                    Passwords must match.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" formControlName="firstName">
+            <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="validation-error">
+                <div *ngIf="registerForm.get('firstName')?.errors?.['required']">
+                    First name is required.
+                </div>
+
+                <div *ngIf="registerForm.get('firstName')?.errors?.['minlenght']">
+                    First name must be at least 2 characters long.
+                </div>
+
+                <div *ngIf="registerForm.get('firstName')?.errors?.['maxlenght']">
+                    First name must have maximum 45 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="last">Last Name:</label>
+            <input type="text" name="lastName" formControlName="lastName">
+            <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="validation-error">
+                <div *ngIf="registerForm.get('lastName')?.errors?.['required']">
+                    Last name is required.
+                </div>
+
+                <div *ngIf="registerForm.get('lastName')?.errors?.['minlenght']">
+                    Last name must be at least 2 characters long.
+                </div>
+
+                <div *ngIf="registerForm.get('lastName')?.errors?.['maxlenght']">
+                    Last name must have maximum 45 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div formGroupName="address" style="width: 100%;">
+            <div class="input-group">
+                <label for="city">City:</label>
+                <input type="text" name="city" formControlName="city">
+                <div *ngIf="registerForm.get('address.city')?.invalid && registerForm.get('address.city')?.touched" class="validation-error">
+                    <div *ngIf="registerForm.get('address.city')?.errors?.['required']">
+                        City is required.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.city')?.errors?.['minlenght']">
+                        City must be at least 2 characters long.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.city')?.errors?.['maxlenght']">
+                        City must have maximum 20 characters long.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="state">State:</label>
+                <input type="text" name="state" formControlName="state">
+                <div *ngIf="registerForm.get('address.state')?.invalid && registerForm.get('address.state')?.touched" class="validation-error">
+                    <div *ngIf="registerForm.get('address.state')?.errors?.['required']">
+                        State is required.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.state')?.errors?.['minlenght']">
+                        State must be at least 2 characters long.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.state')?.errors?.['maxlenght']">
+                        State must have maximum 20 characters long.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="country">Country:</label>
+                <input type="text" name="country" formControlName="country">
+                <div *ngIf="registerForm.get('address.country')?.invalid && registerForm.get('address.country')?.touched" class="validation-error">
+                    <div *ngIf="registerForm.get('address.country')?.errors?.['required']">
+                        Country is required.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.country')?.errors?.['minlenght']">
+                        Country must be at least 2 characters long.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.country')?.errors?.['maxlenght']">
+                        Country must have maximum 20 characters long.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="postalCode">Postal Code:</label>
+                <input type="text" name="postalCode" formControlName="postalCode">
+                <div *ngIf="registerForm.get('address.postalCode')?.invalid && registerForm.get('address.postalCode')?.touched" class="validation-error">
+                    <div *ngIf="registerForm.get('address.postalCode')?.errors?.['required']">
+                        Postal code is required.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.postalCode')?.errors?.['minlenght']">
+                        Postal code must be at least 2 characters long.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.postalCode')?.errors?.['maxlenght']">
+                        Postal code must have maximum 20 characters long.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" name="phoneNumber" formControlName="phoneNumber">
+                <div *ngIf="registerForm.get('address.phoneNumber')?.invalid && registerForm.get('address.phoneNumber')?.touched" class="validation-error">
+                    <div *ngIf="registerForm.get('address.phoneNumber')?.errors?.['required']">
+                        Phone number is required.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.phoneNumber')?.errors?.['minlenght']">
+                        Phone number must be at least 2 characters long.
+                    </div>
+    
+                    <div *ngIf="registerForm.get('address.phoneNumber')?.errors?.['maxlenght']">
+                        Phone number must have maximum 20 characters long.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" value="Register" class="submit-btn" [disabled]="registerForm.invalid">
+    </form>
+</div>

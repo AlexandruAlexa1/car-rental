@@ -42,18 +42,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           // this.router.navigateByUrl('/cars');
         },
         (errorResponse: HttpErrorResponse) => {
-          this.sendErrorNotification(errorResponse.error.message);
+          this.notificationService.sendErrorNotification(errorResponse.error.message);
         }
       )
     );
-  }
-
-  sendErrorNotification(message: any) {
-    if (message) {
-      this.notificationService.sendNotification(NotificationType.INFO, message);
-    } else {
-      this.notificationService.sendNotification(NotificationType.ERROR, 'An error occured. Please try again.');
-    }
   }
 
   ngOnDestroy(): void {

@@ -45,7 +45,14 @@ export class NotificationService {
   private hideNotification(notification: JQuery<HTMLElement>) {
     setTimeout(() => {
       notification.fadeOut();
-    }, 5000);
+    }, 6000);
   }
   
+  sendErrorNotification(message: any) {
+    if (message) {
+      this.sendNotification(NotificationType.INFO, message);
+    } else {
+      this.sendNotification(NotificationType.ERROR, 'An error occured. Please try again.');
+    }
+  }
 }

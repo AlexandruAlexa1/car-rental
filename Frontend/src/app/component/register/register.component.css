@@ -1,48 +1,47 @@
-.login-form-wrapper {
+.form-wrapper {
     width: 90rem;
-    height: 55rem;
+    display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    animation: showForm 3s 0.5s forwards;
 }
 
-.login-form-wrapper::before {
+@keyframes showForm {
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.form-wrapper::before {
     content: "";
     width: 100%;
     height: 0.7rem;
+    background-color: #000;
     position: absolute;
     top: -0.7rem;
-    left: 0;
     transform: skewX(45deg);
     transform-origin: bottom;
-    background-color: #111;
-    /* box-shadow: -0.5rem -1.2rem 0.2rem #000; */
 }
 
-.login-form-wrapper::after {
+.form-wrapper::after {
     content: "";
     height: 100%;
     width: 0.7rem;
+    background-color: #000;
     position: absolute;
-    top: 0;
     left: -0.7rem;
     transform: skewY(45deg);
     transform-origin: right;
-    background-color: #111;
-    /* box-shadow: -1.6rem 0.5rem 0.2rem #000; */
 }
 
 .left-side {
     width: 50%;
-    height: 100%;
     position: relative;
-}
-
-.left-side img {
-    width: 100%;
-    height: 100%;
 }
 
 .left-side div {
@@ -80,27 +79,31 @@
     color: #000;
 }
 
-.login-form {
+.left-side img {
+    width: 100%;
+    height: 100%;
+}
+
+.register-form {
     width: 50%;
     background-color: #000;
+    color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    padding: 0 4rem;
+    padding: 1rem 3rem;
 }
 
 .input-group {
-    width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .input-group label {
-    letter-spacing: .2rem;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 .input-group input {
@@ -139,3 +142,4 @@
     background: none;
     color: #fff;
 }
+
