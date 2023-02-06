@@ -8,8 +8,8 @@ Spring Security with JWT,
 Unit Testing and Integration Testing.
 
 Frontend:
-Login Component
-Register Component
+Login Component,
+Register Component,
 ...
 
 I am currently working on this project.
