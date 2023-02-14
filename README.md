@@ -12,6 +12,7 @@ Login,
 Register,
 List Cars,
 Car Details,
+Custom CSS,
 ...
 
 I am currently working on this project.
