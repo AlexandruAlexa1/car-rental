@@ -1,0 +1,26 @@
+<div class="container">
+    <img src="https://images.unsplash.com/photo-1547588464-56164f45a9c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" alt="" class="main-img">
+
+    <div class="main">
+        <div class="car-name">{{car.brand}} {{car.model}}</div>
+        <div class="car">
+            <div class="car-images">
+                <img src="https://images.unsplash.com/photo-1547588464-56164f45a9c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" alt="" class="main-img">
+                <div class="left-btn"></div>
+                <div class="right-btn"></div>
+            </div>
+            <div class="car-details">
+                <ul>
+                    <li>Brand: {{car.brand}}</li>
+                    <li>Model: {{car.model}}</li>
+                    <li>Year: {{car.year}}</li>
+                    <li>Color: {{car.color}}</li>
+                    <li>Seat count: {{car.seatCount}}</li>
+                    <li>Fuel type: {{car.fuelType}}</li>
+                    <li>Price per day: {{car.pricePerDay | currency: 'EUR'}}</li>
+                </ul>
+                <div class="rent-btn">RENT NOW</div>
+            </div>
+        </div>
+    </div>
+</div>

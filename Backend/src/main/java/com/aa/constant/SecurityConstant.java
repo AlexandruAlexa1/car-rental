@@ -2,7 +2,7 @@ package com.aa.constant;
 
 public class SecurityConstant {
 
-	public static final String[] PUBLIC_URLS = { "/auth/login", "/auth/register" };
+	public static final String[] PUBLIC_URLS = { "/auth/login", "/auth/register",  "/api/v1/cars/**"};
 	public static final String AUTHORITIES = "authorities";
 	public static final String ISSUER = "AA";
 	public static final String AUDIENCE = "Car Rental";

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   checkIfUserIsLoggedIn() {
     if (this.authService.isLoggedIn()) {
-      // this.router.navigateByUrl('/cars');
+      this.router.navigateByUrl('/cars');
     } else {
       this.router.navigateByUrl('/login');
     }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         (response: HttpResponse<Jwt>) => {
           this.authService.saveAuthToken(String(response.body?.jwt));
 
-          // this.router.navigateByUrl('/cars');
+          this.router.navigateByUrl('/cars');
         },
         (errorResponse: HttpErrorResponse) => {
           this.notificationService.sendErrorNotification(errorResponse.error.message);

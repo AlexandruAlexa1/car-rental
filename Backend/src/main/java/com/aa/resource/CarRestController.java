@@ -59,7 +59,7 @@ public class CarRestController {
 	@GetMapping("/fuel-type")
 	public ResponseEntity<List<Car>> findByFuelType(@RequestParam String fuelType) {
 		try {
-			List<Car> listCars = service.findByFuelType(FuelType.valueOf(fuelType));
+			List<Car> listCars = service.findByFuelType(FuelType.valueOf(fuelType.toUpperCase()));
 			
 			if (listCars.isEmpty()) {
 				return ResponseEntity.noContent().build();

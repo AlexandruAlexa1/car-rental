@@ -12,6 +12,7 @@
     font-weight: bolder;
     display: none;
     animation: notification .5s forwards;
+    z-index: 100;
 }
 
 @keyframes notification {

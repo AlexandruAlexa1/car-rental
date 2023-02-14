@@ -60,6 +60,7 @@ public class SecurityConfiguration {
 			.requestMatchers(HttpMethod.POST, "/api/v1/locations").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.PUT, "/api/v1/locations").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.DELETE, "/api/v1/locations/**").hasAuthority("ADMIN")
+			.requestMatchers(HttpMethod.GET, "/api/v1/cars/**").hasAnyAuthority("ADMIN", "USER")
 			.requestMatchers(HttpMethod.POST, "/api/v1/cars").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.PUT, "/api/v1/cars").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.DELETE, "/api/v1/cars/**").hasAuthority("ADMIN")

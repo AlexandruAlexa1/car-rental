@@ -1,0 +1,55 @@
+<div class="container">
+    <img src="https://images.unsplash.com/flagged/photo-1553505192-acca7d4509be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1490&q=80" alt="" class="main-img">
+
+    <div class="main">
+        <div style="display: flex; justify-content: space-between;">
+            <!-- Find by Brand and Model -->
+            <form (ngSubmit)="findByBrandAndModel(brand.value, model.value)">
+                <div class="input-group">
+                    <label for="brand">Brand:</label>
+                    <input type="text" name="brand" #brand>
+                </div>
+            
+                <div class="input-group">
+                    <label for="model">Model:</label>
+                    <input type="text" name="model" #model>
+                </div>
+
+                <input type="submit" value="Find by brand and model">
+            </form>
+
+            <!-- Find Available Cars -->
+            <form (ngSubmit)="findAvailableCars(startDate.value, endDate.value)">
+                <input type="date" name="startDate" #startDate>
+                <input type="date" name="endDate" #endDate>
+                <input type="submit" value="Find available cars">
+            </form>
+
+            <!-- Find by Fuel Type -->
+            <form (ngSubmit)="findByFuelType(fuelType.value)">
+                <select name="fuelType" #fuelType>
+                    <option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelType}}</option>
+                </select>
+                <input type="submit" value="Find by fuel type">
+                <input type="button" value="Clear filters" style="margin-left: 2rem;" (click)="listAll()">
+            </form>
+        </div>
+
+        <div class="cars">
+            <div *ngFor="let car of cars | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
+                <a routerLink="/cars/detail/{{car.id}}">
+                    <div class="car">
+                        <img src="https://images.unsplash.com/photo-1510903117032-f1596c327647?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                            class="car-img">
+                        <h5 class="car-name">{{ car.brand }} {{ car.model }}</h5>
+                        <span class="car-price">Price per day: {{ car.pricePerDay | currency: 'EUR'}}</span>          
+                    </div>
+                </a>
+            </div>
+
+            <!-- Pagination -->
+            <pagination-controls (pageChange)="p = $event" class="pagination-controls"></pagination-controls>
+        </div>
+    </div>
+</div>
+
