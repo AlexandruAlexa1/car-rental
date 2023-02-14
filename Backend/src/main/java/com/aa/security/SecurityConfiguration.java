@@ -57,6 +57,7 @@ public class SecurityConfiguration {
 			.authorizeHttpRequests()
 			.requestMatchers(PUBLIC_URLS).permitAll()
 			.requestMatchers("/api/v1/users/**").hasAuthority("ADMIN")
+			.requestMatchers(HttpMethod.GET, "/api/v1/locations/**").hasAnyAuthority("ADMIN", "USER")
 			.requestMatchers(HttpMethod.POST, "/api/v1/locations").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.PUT, "/api/v1/locations").hasAuthority("ADMIN")
 			.requestMatchers(HttpMethod.DELETE, "/api/v1/locations/**").hasAuthority("ADMIN")
