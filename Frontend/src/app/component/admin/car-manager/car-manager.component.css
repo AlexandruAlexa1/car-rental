@@ -1,0 +1,120 @@
+.admin-container {
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    position: absolute;
+    color: aqua;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.title div {
+    font-size: 3.2rem;
+}
+
+/* Table */
+.table-wrapper {
+    width: 100rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-car-btn {
+    background: transparent;
+    color: aqua;
+    border: .1rem solid aqua;
+    padding: 0 .5rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    letter-spacing: .2rem;
+    font-size: 1.4rem;
+}
+
+.add-car-btn:hover {
+    background-color: aqua;
+    color: #000;
+    transition: all .5s;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    font-size: 1.6rem;
+    text-align: left;
+}
+
+table tr td {
+    font-size: 1.6rem;
+    border-bottom: .1rem solid aqua;
+    padding: 1rem 0;
+}
+
+table tr:hover {
+    background: rgba(0, 255, 255, 0.5);
+    transition: background 1s;
+}
+
+.table-links button {
+    font-size: 1.7rem;
+    background: transparent;
+    color: aqua;
+    margin-right: 1rem;
+    transition: color .5s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.table-links a:hover,
+.table-links button:hover {
+    color: #eee;
+}
+
+.table-links a:nth-child(3) {
+    margin-right: 0;
+}
+/* End of Table */
+
+/* Pagination */
+.pagination-controls{
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
+
+.pagination-controls /deep/ .ngx-pagination li {
+    color: aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination li a {
+    color: aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination .current {
+    background: transparent;
+    border: .1rem solid aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: transparent;
+    color: aqua;
+    border: .1rem solid aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination a:focus, .ngx-pagination button:focus {
+    outline: none;
+    background: aqua;
+    color: #000;
+}

@@ -1,5 +1,6 @@
 import { FuelType } from "../enum/fuel-type";
 import { Image } from "./image";
+import { Location } from "./location";
 import { Rent } from "./rent";
 
 export class Car {

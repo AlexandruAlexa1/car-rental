@@ -1,0 +1,61 @@
+<div class="admin-container">
+
+<div class="title">
+    <div>M</div>
+    <div>A</div>
+    <div>N</div>
+    <div>A</div>
+    <div>G</div>
+    <div>E</div>
+    <div style="margin-top: 2rem">C</div>
+    <div>A</div>
+    <div>R</div>
+    <div>S</div>
+</div>
+
+<div class="table-wrapper">
+    <button class="add-car-btn" (click)="showForm()">NEW CAR</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of cars | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage}">
+                <td>{{car.id}}</td>
+                <td>{{car.brand}}</td>
+                <td>{{car.model}}</td>
+                <td>{{car.year}}</td>
+                <td>{{car.color}}</td>
+                <td>{{car.pricePerDay | currency: 'EUR'}}</td>
+                <td>{{car.available}}</td>
+                <td class="table-links">
+                    <button (click)="viewDetails(car.id)" class="fa-sharp fa-regular fa-file"></button>
+                    <button (click)="editCar(car.id)" class="fa-sharp fa-regular fa-pen-to-square"></button>
+                    <button (click)="showDeleteModal(car.id)" class="fa-solid fa-xmark"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <pagination-controls (pageChange)="currentPage = $event" class="pagination-controls"></pagination-controls>
+</div>
+</div>
+
+<!-- Delete Modal -->
+<div class="delete-modal">
+    <div class="delete-modal-content">
+        <h5 class="delete-modal-message"></h5>
+        <button class="close-modal-btn fa-solid fa-xmark" (click)="closeModal()"></button>
+        <button (click)="delete()" class="delete-modal-btn">Confirm</button>
+    </div>
+</div>

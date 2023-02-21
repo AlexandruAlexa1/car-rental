@@ -111,15 +111,11 @@ input[type="date"] {
 
 /* Pagination */
 .pagination-controls {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
     position: absolute;
     left: 50%;
     bottom: 2rem;
     transform: translateX(-50%);
-    
-  }
+}
 
 .pagination-controls{
     font-family: 'Lato', sans-serif;
@@ -150,4 +146,3 @@ input[type="date"] {
     background: aqua;
     color: #000;
 }
-/* End of Pagination */

@@ -1,0 +1,42 @@
+form {
+    width: 50rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    margin-right: 1rem;
+    font-size: 1.6rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: .1rem solid #000;
+    font-size: 1.6rem;
+}
+
+.submit-btn {
+    width: 100%;
+    background: transparent;
+    border: .1rem solid #000;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    cursor: pointer;
+    transition: background .5s;
+    padding: .2rem 0;
+}
+
+.submit-btn:hover {
+    background-color: #eee;
+}

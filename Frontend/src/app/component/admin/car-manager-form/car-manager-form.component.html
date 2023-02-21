@@ -1,0 +1,227 @@
+<!-- New Mode -->
+<form *ngIf="!isEditMode" [formGroup]="carForm" (ngSubmit)="save()" >
+    <div class="input-group">
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" formControlName="brand" required>
+        <div *ngIf="carForm.get('brand')?.invalid && carForm.get('brand')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('brand')?.errors?.['required']">
+                Brand is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="model">Model:</label>
+        <input type="text" name="model" formControlName="model" required>
+        <div *ngIf="carForm.get('model')?.invalid && carForm.get('model')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('model')?.errors?.['required']">
+                Model is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="year">Year:</label>
+        <input type="text" name="year" formControlName="year" required>
+        <div *ngIf="carForm.get('year')?.invalid && carForm.get('year')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('year')?.errors?.['required']">
+                Year is required.
+            </div>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <label for="color">Color:</label>
+        <input type="text" name="color" formControlName="color" required>
+        <div *ngIf="carForm.get('color')?.invalid && carForm.get('color')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('color')?.errors?.['required']">
+                Color is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="seatCount">Seat count:</label>
+        <input type="text" name="seatCount" formControlName="seatCount" required>
+        <div *ngIf="carForm.get('seatCount')?.invalid && carForm.get('seatCount')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('seatCount')?.errors?.['required']">
+                Seat count is required.
+            </div>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <label for="fuelType">Fuel type:</label>
+
+        <select name="fuelType" formControlName="fuelType" required>
+            <option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelType}}</option>
+        </select>
+
+        <div *ngIf="carForm.get('fuelType')?.invalid && carForm.get('fuelType')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('fuelType')?.errors?.['required']">
+                Fuel type is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="pricePerDay">Price per day:</label>
+        <input type="text" name="pricePerDay" formControlName="pricePerDay" required>
+        <div *ngIf="carForm.get('pricePerDay')?.invalid && carForm.get('pricePerDay')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('pricePerDay')?.errors?.['minLenght']">
+                Price per day c'not be less than 0.
+            </div>
+        </div>
+    </div>
+
+    <b>SET UP IMAGES</b>
+
+    <div formGroupName="address">
+        <div class="input-group">
+            <label for="address">Address:</label>
+            <input type="text" name="address" formControlName="address">
+            <div *ngIf="carForm.get('address')?.invalid && carForm.get('address')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('address')?.errors?.['required']">
+                    Address is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="phoneNumber">Phone number:</label>
+            <input type="text" name="phoneNumber" formControlName="phoneNumber">
+            <div *ngIf="carForm.get('phoneNumber')?.invalid && carForm.get('phoneNumber')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('phoneNumber')?.errors?.['required']">
+                    Phone number is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="email">E-mail:</label>
+            <input type="text" name="email" formControlName="email">
+            <div *ngIf="carForm.get('email')?.invalid && carForm.get('email')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('email')?.errors?.['required']">
+                    E-mail is required.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Save" class="submit-btn" [disabled]="carForm.invalid">
+</form>
+
+<!-- Edit mode -->
+<form *ngIf="isEditMode" [formGroup]="carForm" (ngSubmit)="save()">
+    <input type="hidden" name="id" formControlName="id" [(ngModel)]="car.id">
+
+    <div class="input-group">
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" formControlName="brand" required [(ngModel)]="car.brand">
+        <div *ngIf="carForm.get('brand')?.invalid && carForm.get('brand')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('brand')?.errors?.['required']">
+                Brand is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="model">Model:</label>
+        <input type="text" name="model" formControlName="model" required [(ngModel)]="car.model">
+        <div *ngIf="carForm.get('model')?.invalid && carForm.get('model')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('model')?.errors?.['required']">
+                Model is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="year">Year:</label>
+        <input type="text" name="year" formControlName="year" required [(ngModel)]="car.year">
+        <div *ngIf="carForm.get('year')?.invalid && carForm.get('year')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('year')?.errors?.['required']">
+                Year is required.
+            </div>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <label for="color">Color:</label>
+        <input type="text" name="color" formControlName="color" required [(ngModel)]="car.color">
+        <div *ngIf="carForm.get('color')?.invalid && carForm.get('color')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('color')?.errors?.['required']">
+                Color is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="seatCount">Seat count:</label>
+        <input type="text" name="seatCount" formControlName="seatCount" required [(ngModel)]="car.seatCount">
+        <div *ngIf="carForm.get('seatCount')?.invalid && carForm.get('seatCount')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('seatCount')?.errors?.['required']">
+                Seat count is required.
+            </div>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <label for="fuelType">Fuel type:</label>
+
+        <select name="fuelType" formControlName="fuelType" required [(ngModel)]="car.fuelType">
+            <option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelType}}</option>
+        </select>
+
+        <div *ngIf="carForm.get('fuelType')?.invalid && carForm.get('fuelType')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('fuelType')?.errors?.['required']">
+                Fuel type is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="pricePerDay">Price per day:</label>
+        <input type="text" name="pricePerDay" formControlName="pricePerDay" required [(ngModel)]="car.pricePerDay">
+        <div *ngIf="carForm.get('pricePerDay')?.invalid && carForm.get('pricePerDay')?.touched" class="validation-error">
+            <div *ngIf="carForm.get('pricePerDay')?.errors?.['minLenght']">
+                Price per day c'not be less than 0.
+            </div>
+        </div>
+    </div>
+
+    <b>SET UP IMAGES</b>
+
+    <div formGroupName="address">
+        <div class="input-group">
+            <label for="address">Address:</label>
+            <input type="text" name="address" formControlName="address" [(ngModel)]="car.location.address">
+            <div *ngIf="carForm.get('address')?.invalid && carForm.get('address')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('address')?.errors?.['required']">
+                    Address is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="phoneNumber">Phone number:</label>
+            <input type="text" name="phoneNumber" formControlName="phoneNumber" [(ngModel)]="car.location.phoneNumber">
+            <div *ngIf="carForm.get('phoneNumber')?.invalid && carForm.get('phoneNumber')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('phoneNumber')?.errors?.['required']">
+                    Phone number is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="email">E-mail:</label>
+            <input type="text" name="email" formControlName="email" [(ngModel)]="car.location.email">
+            <div *ngIf="carForm.get('email')?.invalid && carForm.get('email')?.touched" class="validation-error">
+                <div *ngIf="carForm.get('email')?.errors?.['required']">
+                    E-mail is required.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Save" class="submit-btn" [disabled]="carForm.invalid">
+</form>

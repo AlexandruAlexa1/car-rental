@@ -12,6 +12,11 @@ import { CarComponent } from './component/car/car.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CarManagerComponent } from './component/admin/car-manager/car-manager.component';
+import { CarManagerDetailsComponent } from './component/admin/car-manager-details/car-manager-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CarManagerFormComponent } from './component/admin/car-manager-form/car-manager-form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NotificationComponent,
     RegisterComponent,
     CarComponent,
-    CarDetailsComponent
+    CarDetailsComponent,
+    CarManagerComponent,
+    CarManagerDetailsComponent,
+    CarManagerFormComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +36,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -46,3 +46,121 @@ html {
         visibility: visible;
     }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Delete Modal */
+.delete-modal {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    animation: show 1s forwards;
+    display: none;
+}
+
+.delete-modal-content {
+    width: 42rem;
+    height: 15rem;
+    background-color: #000;
+    box-shadow: .2rem .2rem 1rem aqua;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    animation: show 1s .5s forwards;
+}
+
+.delete-modal-content h5 {
+    color: aqua;
+    letter-spacing: .2rem;
+    white-space: nowrap;
+    font-weight: 400;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.delete-modal-btn {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    color: aqua;
+    border: .1rem solid aqua;
+    letter-spacing: .2rem;
+    padding: 0 .5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: .5rem;
+}
+
+.delete-modal-btn:hover {
+    background-color: aqua;
+    color: #000;
+    transition: all .5s;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: aqua;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.close-modal-btn:hover {
+    color: red;
+    transition: color .5s;
+}
+
+/* Pagination */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination-controls{
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
+
+.pagination-controls /deep/ .ngx-pagination li {
+    color: aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination li a {
+    color: aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination .current {
+    background: transparent;
+    border: .1rem solid aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: transparent;
+    color: aqua;
+    border: .1rem solid aqua;
+}
+
+.pagination-controls /deep/ .ngx-pagination a:focus, .ngx-pagination button:focus {
+    outline: none;
+    background: aqua;
+    color: #000;
+}
+/* End of Pagination */
