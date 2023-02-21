@@ -1,4 +1,4 @@
-# FULL STACK CAR RENTAL PROJECT
+# FULL STACK CAR RENTAL PROJECT Spring Boot with Angular
 Backend:
 User Management,
 Car Management,
