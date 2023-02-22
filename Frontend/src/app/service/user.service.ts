@@ -7,10 +7,30 @@ import { User } from '../domain/user';
   providedIn: 'root'
 })
 export class UserService {
-
-  host = 'http://localhost:8080';
+ 
+  private host = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) { }
+
+  save(user: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.host}/api/v1/users`, user);
+  }
+
+  update(user: User): Observable<User> {
+    return this.httpClient.put<User>(`${this.host}/api/v1/users`, user);
+  }
+
+  listAll(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.host}/api/v1/users`);
+  }
+
+  get(user_id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.host}/api/v1/users/${user_id}`);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.host}/api/v1/users/${id}`)
+  }
 
   register(user: User): Observable<User> {
     return this.httpClient.post<User>(`${this.host}/auth/register`, user);

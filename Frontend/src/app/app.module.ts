@@ -17,6 +17,9 @@ import { CarManagerDetailsComponent } from './component/admin/car-manager-detail
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CarManagerFormComponent } from './component/admin/car-manager-form/car-manager-form.component';
+import { UserManagerComponent } from './component/admin/user-manager/user-manager.component';
+import { UserManagerFormComponent } from './component/admin/user-manager-form/user-manager-form.component';
+import { UserManagerDetailsComponent } from './component/admin/user-manager-details/user-manager-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { CarManagerFormComponent } from './component/admin/car-manager-form/car-
     CarDetailsComponent,
     CarManagerComponent,
     CarManagerDetailsComponent,
-    CarManagerFormComponent
+    CarManagerFormComponent,
+    UserManagerComponent,
+    UserManagerFormComponent,
+    UserManagerDetailsComponent
   ],
   imports: [
     BrowserModule,

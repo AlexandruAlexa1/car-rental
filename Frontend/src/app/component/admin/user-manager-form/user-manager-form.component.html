@@ -1,0 +1,255 @@
+<!-- New Mode -->
+<form *ngIf="!isEditMode" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" formControlName="email" required>
+        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('email')?.errors?.['required']">
+                E-mail is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" formControlName="password" required>
+        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('password')?.errors?.['required']">
+                Password is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="firstName">First name:</label>
+        <input type="firstName" name="text" formControlName="firstName" required>
+        <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('firstName')?.errors?.['required']">
+                First name is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="lastName">Last name:</label>
+        <input type="lastName" name="text" formControlName="lastName" required>
+        <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('lastName')?.errors?.['required']">
+                Last name is required.
+            </div>
+        </div>
+    </div>
+
+    <div formGroupName="address">
+        <div class="input-group">
+            <label for="city">City:</label>
+            <input formControlName="city" type="text" name="city">
+            <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('city')?.errors?.['required']">
+                    City is required.
+                </div>
+                <div *ngIf="userForm.get('city')?.errors?.['minlength']">
+                    City must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('city')?.errors?.['maxlength']">
+                    City must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="state">State:</label>
+            <input formControlName="state" type="text" name="state">
+            <div *ngIf="userForm.get('state')?.invalid && userForm.get('state')?.touched">
+                <div *ngIf="userForm.get('state')?.errors?.['required']">
+                    State is required.
+                </div>
+                <div *ngIf="userForm.get('state')?.errors?.['minlength']">
+                    State must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('state')?.errors?.['maxlength']">
+                    State must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="country">Country:</label>
+            <input formControlName="country" type="text" name="country">
+            <div *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('country')?.errors?.['required']">
+                    Country is required.
+                </div>
+                <div *ngIf="userForm.get('country')?.errors?.['minlength']">
+                    Country must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('country')?.errors?.['maxlength']">
+                    Country must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="postalCode">Postal code:</label>
+            <input formControlName="postalCode" type="text" name="postalCode">
+            <div *ngIf="userForm.get('postalCode')?.invalid && userForm.get('postalCode')?.touched" class="validation-error" class="validation-error">
+                <div *ngIf="userForm.get('postalCode')?.errors?.['required']">
+                    Postal code is required.
+                </div>
+                <div *ngIf="userForm.get('postalCode')?.errors?.['minlength']">
+                    Postl code must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('postalCode')?.errors?.['maxlength']">
+                    Postal Code must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="phoneNumber">Phone number:</label>
+            <input formControlName="phoneNumber" type="text" name="phoneNumber">
+            <div *ngIf="userForm.get('phoneNumber')?.invalid && userForm.get('phoneNumber')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['required']">
+                    Phone Number is required.
+                </div>
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['minlength']">
+                    Phone Number must be at least 10 characters long.
+                </div>
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['maxlength']">
+                    Phone Number must have maximum 15 characters long.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Save" [disabled]="userForm.invalid">
+</form>
+
+<!-- Edit Mode -->
+<form *ngIf="isEditMode" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" name="id" formControlName="id" [(ngModel)]="user.id">
+
+    <div class="input-group">
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" formControlName="email" required [(ngModel)]="user.email">
+        <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('email')?.errors?.['required']">
+                E-mail is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" formControlName="password" required [(ngModel)]="user.password">
+        <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('password')?.errors?.['required']">
+                Password is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="firstName">First name:</label>
+        <input type="firstName" name="text" formControlName="firstName" required [(ngModel)]="user.firstName">
+        <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('firstName')?.errors?.['required']">
+                First name is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="lastName">Last name:</label>
+        <input type="lastName" name="text" formControlName="lastName" required [(ngModel)]="user.lastName">
+        <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="validation-error">
+            <div *ngIf="userForm.get('lastName')?.errors?.['required']">
+                Last name is required.
+            </div>
+        </div>
+    </div>
+
+    <div formGroupName="address">
+        <div class="input-group">
+            <label for="city">City:</label>
+            <input formControlName="city" type="text" name="city" [(ngModel)]="user.address.city">
+            <div *ngIf="userForm.get('city')?.invalid && userForm.get('city')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('city')?.errors?.['required']">
+                    City is required.
+                </div>
+                <div *ngIf="userForm.get('city')?.errors?.['minlength']">
+                    City must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('city')?.errors?.['maxlength']">
+                    City must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="state">State:</label>
+            <input formControlName="state" type="text" name="state" [(ngModel)]="user.address.state">
+            <div *ngIf="userForm.get('state')?.invalid && userForm.get('state')?.touched">
+                <div *ngIf="userForm.get('state')?.errors?.['required']">
+                    State is required.
+                </div>
+                <div *ngIf="userForm.get('state')?.errors?.['minlength']">
+                    State must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('state')?.errors?.['maxlength']">
+                    State must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="country">Country:</label>
+            <input formControlName="country" type="text" name="country" [(ngModel)]="user.address.country">
+            <div *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('country')?.errors?.['required']">
+                    Country is required.
+                </div>
+                <div *ngIf="userForm.get('country')?.errors?.['minlength']">
+                    Country must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('country')?.errors?.['maxlength']">
+                    Country must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="postalCode">Postal code:</label>
+            <input formControlName="postalCode" type="text" name="postalCode" [(ngModel)]="user.address.postalCode">
+            <div *ngIf="userForm.get('postalCode')?.invalid && userForm.get('postalCode')?.touched" class="validation-error" class="validation-error">
+                <div *ngIf="userForm.get('postalCode')?.errors?.['required']">
+                    Postal code is required.
+                </div>
+                <div *ngIf="userForm.get('postalCode')?.errors?.['minlength']">
+                    Postl code must be at least 2 characters long.
+                </div>
+                <div *ngIf="userForm.get('postalCode')?.errors?.['maxlength']">
+                    Postal Code must have maximum 20 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="phoneNumber">Phone number:</label>
+            <input formControlName="phoneNumber" type="text" name="phoneNumber" [(ngModel)]="user.address.phoneNumber">
+            <div *ngIf="userForm.get('phoneNumber')?.invalid && userForm.get('phoneNumber')?.touched" class="validation-error">
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['required']">
+                    Phone Number is required.
+                </div>
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['minlength']">
+                    Phone Number must be at least 10 characters long.
+                </div>
+                <div *ngIf="userForm.get('phoneNumber')?.errors?.['maxlength']">
+                    Phone Number must have maximum 15 characters long.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Save" [disabled]="userForm.invalid">
+</form>
