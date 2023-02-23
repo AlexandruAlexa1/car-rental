@@ -9,6 +9,7 @@ import { UserManagerComponent } from './component/admin/user-manager/user-manage
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { CarComponent } from './component/car/car.component';
 import { LoginComponent } from './component/login/login.component';
+import { MenuComponent } from './component/menu/menu.component';
 import { RegisterComponent } from './component/register/register.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'admin/users', component: UserManagerComponent },
   { path: 'admin/users/detail', component: UserManagerDetailsComponent },
   { path: 'admin/users/form', component: UserManagerFormComponent },
+  { path: 'menu', component: MenuComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

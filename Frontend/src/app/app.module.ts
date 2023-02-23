@@ -20,6 +20,7 @@ import { CarManagerFormComponent } from './component/admin/car-manager-form/car-
 import { UserManagerComponent } from './component/admin/user-manager/user-manager.component';
 import { UserManagerFormComponent } from './component/admin/user-manager-form/user-manager-form.component';
 import { UserManagerDetailsComponent } from './component/admin/user-manager-details/user-manager-details.component';
+import { MenuComponent } from './component/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserManagerDetailsComponent } from './component/admin/user-manager-deta
     CarManagerFormComponent,
     UserManagerComponent,
     UserManagerFormComponent,
-    UserManagerDetailsComponent
+    UserManagerDetailsComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
