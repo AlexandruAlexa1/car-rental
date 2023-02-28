@@ -1,0 +1,43 @@
+<form [formGroup]="rentForm" (ngSubmit)="update()">
+    <input type="hidden" name="id" formControlName="id">
+
+    <div class="input-group">
+        <label for="startDate">Start date:</label>
+        <input type="date" name="startDate" formControlName="startDate" required>
+        <div *ngIf="rentForm.get('startDate')?.invalid && rentForm.get('startDate')?.touched" class="validation-error">
+            <div *ngIf="rentForm.get('startDate')?.errors?.['required']">
+                Start date is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <label for="endDate">End date:</label>
+        <input type="date" name="endDate" formControlName="endDate" required>
+        <div *ngIf="rentForm.get('endDate')?.invalid && rentForm.get('endDate')?.touched" class="validation-error">
+            <div *ngIf="rentForm.get('endDate')?.errors?.['required']">
+                End date is required.
+            </div>
+        </div>
+    </div>
+
+    <div formGroupName="car">
+        <div class="input-group">
+            <label for="car">Car:</label>
+            <select name="car" formControlName="car">
+                <option *ngFor="let car of cars" [value]="car.id">{{car.brand}} {{car.model}}</option>
+            </select>
+        </div>
+    </div>
+    
+    <div formGroupName="user">
+        <div class="input-group">
+            <label for="user">User:</label>
+            <select name="user" formControlName="user">
+                <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+            </select>
+        </div>
+    </div>
+
+    <input type="submit" value="Update" [disabled]="rentForm.invalid">
+</form>

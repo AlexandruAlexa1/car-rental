@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class UserManagerFormComponent implements OnInit, OnDestroy {
 
+  @Output() userAdded = new EventEmitter<User>();
   subscriptions: Subscription[] = [];
   userForm: FormGroup;
   isEditMode = this.user_id != null;
@@ -98,6 +99,7 @@ export class UserManagerFormComponent implements OnInit, OnDestroy {
       this.userService.update(this.userForm.value).subscribe(
         (response: User) => {
           this.notificationService.sendNotification(NotificationType.SUCCESS, 'The user has beed updated successfuly!');
+          this.userAdded.emit(response);
         },
         (errorResponse: HttpErrorResponse) => {
           this.notificationService.sendErrorNotification(errorResponse.error.message);
@@ -111,6 +113,7 @@ export class UserManagerFormComponent implements OnInit, OnDestroy {
       this.userService.save(this.userForm.value).subscribe(
         (response: User) => {
           this.notificationService.sendNotification(NotificationType.SUCCESS, 'The user has beed saved successfuly!');
+          this.userAdded.emit(response);
         }, 
         (errorResponse: HttpErrorResponse) => {
           this.notificationService.sendErrorNotification(errorResponse.error.message);

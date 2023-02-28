@@ -1,0 +1,61 @@
+ <!-- Menu -->
+ <menu></menu>
+
+<div class="admin-container">
+
+<div class="title">
+    <div>M</div>
+    <div>A</div>
+    <div>N</div>
+    <div>A</div>
+    <div>G</div>
+    <div>E</div>
+    <div style="margin-top: 2rem">R</div>
+    <div>E</div>
+    <div>N</div>
+    <div>T</div>
+    <div>S</div>
+</div>
+
+<div class="table-wrapper">
+    <!-- <button class="add-car-btn" (click)="showForm()">NEW CAR</button> -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Car</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rent of rents | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPage}">
+                <td>{{rent.id}}</td>
+                <td>{{rent.startDate}}</td>
+                <td>{{rent.endDate}}</td>
+                <td>{{rent.car.brand}} {{rent.car.model}}</td>
+                <td>{{rent.user.firstName}} {{rent.user.lastName}}</td>
+                <td class="table-links">
+                    <button (click)="viewDetails(rent.id)" class="fa-sharp fa-regular fa-file"></button>
+                    <button (click)="editRent(rent.id)" class="fa-sharp fa-regular fa-pen-to-square"></button>
+                    <button (click)="showDeleteModal(rent.id)" class="fa-solid fa-xmark"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <pagination-controls (pageChange)="currentPage = $event" class="pagination-controls"></pagination-controls>
+</div>
+</div>
+
+<!-- Delete Modal -->
+<div class="delete-modal">
+    <div class="delete-modal-content">
+        <h5 class="delete-modal-message"></h5>
+        <button class="close-modal-btn fa-solid fa-xmark" (click)="closeModal()"></button>
+        <button (click)="delete()" class="delete-modal-btn">Confirm</button>
+    </div>
+</div>

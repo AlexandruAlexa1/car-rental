@@ -51,9 +51,9 @@ export class UserManagerComponent implements OnInit, OnDestroy {
       data: this.user_id
     });
 
-    // dialogRef.componentInstance.userAdded.subscribe(() => {
-    //   this.listAll();
-    // });
+    dialogRef.componentInstance.userAdded.subscribe(() => {
+      this.listAll();
+    });
   }
 
   viewDetails(id: number) {

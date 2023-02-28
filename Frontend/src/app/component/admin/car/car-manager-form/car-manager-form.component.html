@@ -76,36 +76,11 @@
 
     <b>SET UP IMAGES</b>
 
-    <div formGroupName="address">
-        <div class="input-group">
-            <label for="address">Address:</label>
-            <input type="text" name="address" formControlName="address">
-            <div *ngIf="carForm.get('address')?.invalid && carForm.get('address')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('address')?.errors?.['required']">
-                    Address is required.
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="phoneNumber">Phone number:</label>
-            <input type="text" name="phoneNumber" formControlName="phoneNumber">
-            <div *ngIf="carForm.get('phoneNumber')?.invalid && carForm.get('phoneNumber')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('phoneNumber')?.errors?.['required']">
-                    Phone number is required.
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="email">E-mail:</label>
-            <input type="text" name="email" formControlName="email">
-            <div *ngIf="carForm.get('email')?.invalid && carForm.get('email')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('email')?.errors?.['required']">
-                    E-mail is required.
-                </div>
-            </div>
-        </div>
+    <div class="input-group">
+        <label for="location">Location:</label>
+        <select name="location" formControlName="location">
+            <option *ngFor="let location of locations" [value]="location.id">{{location.address}}</option>
+        </select>
     </div>
 
     <input type="submit" value="Save" class="submit-btn" [disabled]="carForm.invalid">
@@ -191,36 +166,11 @@
 
     <b>SET UP IMAGES</b>
 
-    <div formGroupName="address">
-        <div class="input-group">
-            <label for="address">Address:</label>
-            <input type="text" name="address" formControlName="address" [(ngModel)]="car.location.address">
-            <div *ngIf="carForm.get('address')?.invalid && carForm.get('address')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('address')?.errors?.['required']">
-                    Address is required.
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="phoneNumber">Phone number:</label>
-            <input type="text" name="phoneNumber" formControlName="phoneNumber" [(ngModel)]="car.location.phoneNumber">
-            <div *ngIf="carForm.get('phoneNumber')?.invalid && carForm.get('phoneNumber')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('phoneNumber')?.errors?.['required']">
-                    Phone number is required.
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="email">E-mail:</label>
-            <input type="text" name="email" formControlName="email" [(ngModel)]="car.location.email">
-            <div *ngIf="carForm.get('email')?.invalid && carForm.get('email')?.touched" class="validation-error">
-                <div *ngIf="carForm.get('email')?.errors?.['required']">
-                    E-mail is required.
-                </div>
-            </div>
-        </div>
+    <div class="input-group">
+        <label for="location">Location:</label>
+        <select name="location" formControlName="location">
+            <option *ngFor="let location of locations" [value]="location.id">{{location.address}}</option>
+        </select>
     </div>
 
     <input type="submit" value="Save" class="submit-btn" [disabled]="carForm.invalid">

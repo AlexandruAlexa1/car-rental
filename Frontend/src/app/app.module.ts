@@ -12,15 +12,21 @@ import { CarComponent } from './component/car/car.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CarDetailsComponent } from './component/car-details/car-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CarManagerComponent } from './component/admin/car-manager/car-manager.component';
-import { CarManagerDetailsComponent } from './component/admin/car-manager-details/car-manager-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CarManagerFormComponent } from './component/admin/car-manager-form/car-manager-form.component';
-import { UserManagerComponent } from './component/admin/user-manager/user-manager.component';
-import { UserManagerFormComponent } from './component/admin/user-manager-form/user-manager-form.component';
-import { UserManagerDetailsComponent } from './component/admin/user-manager-details/user-manager-details.component';
 import { MenuComponent } from './component/menu/menu.component';
+import { RentManagerComponent } from './component/admin/rent/rent-manager/rent-manager.component';
+import { RentManagerDetailsComponent } from './component/admin/rent/rent-manager-details/rent-manager-details.component';
+import { RentManagerFormComponent } from './component/admin/rent/rent-manager-form/rent-manager-form.component';
+import { CarManagerComponent } from './component/admin/car/car-manager/car-manager.component';
+import { CarManagerDetailsComponent } from './component/admin/car/car-manager-details/car-manager-details.component';
+import { CarManagerFormComponent } from './component/admin/car/car-manager-form/car-manager-form.component';
+import { UserManagerComponent } from './component/admin/user/user-manager/user-manager.component';
+import { UserManagerFormComponent } from './component/admin/user/user-manager-form/user-manager-form.component';
+import { UserManagerDetailsComponent } from './component/admin/user/user-manager-details/user-manager-details.component';
+import { LocationManagerComponent } from './component/admin/location/location-manager/location-manager.component';
+import { LocationDetailsComponent } from './component/admin/location/location-details/location-details.component';
+import { LocationFormComponent } from './component/admin/location/location-form/location-form.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,13 @@ import { MenuComponent } from './component/menu/menu.component';
     UserManagerComponent,
     UserManagerFormComponent,
     UserManagerDetailsComponent,
-    MenuComponent
+    MenuComponent,
+    RentManagerComponent,
+    RentManagerDetailsComponent,
+    RentManagerFormComponent,
+    LocationManagerComponent,
+    LocationDetailsComponent,
+    LocationFormComponent
   ],
   imports: [
     BrowserModule,

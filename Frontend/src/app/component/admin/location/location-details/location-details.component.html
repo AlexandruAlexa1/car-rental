@@ -1,0 +1,10 @@
+<ul>
+    <li>ID: {{location.id}}</li>
+    <li>Address: {{location.address}}</li>
+    <li>Phone number: {{location.phoneNumber}}</li>
+    <li>E-mail: {{location.email}}</li>
+    <li><b>Cars:</b></li>
+    <ul>
+        <li *ngFor="let car of location.cars">{{car.brand}} {{car.model}} {{car.year}}</li>
+    </ul>
+</ul>

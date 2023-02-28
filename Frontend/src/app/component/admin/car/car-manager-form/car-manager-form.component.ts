@@ -4,9 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription} from 'rxjs';
 import { Car } from 'src/app/domain/car';
+import { Location } from 'src/app/domain/location';
 import { FuelType } from 'src/app/enum/fuel-type';
 import { NotificationType } from 'src/app/enum/notification-type';
 import { CarService } from 'src/app/service/car.service';
+import { LocationService } from 'src/app/service/location.service';
 import { NotificationService } from 'src/app/service/notification.service';
 
 @Component({
@@ -23,20 +25,37 @@ export class CarManagerFormComponent implements OnInit, OnDestroy {
   isEditMode = this.carId != null;
   carForm: FormGroup;
   car = new Car();
+  locations: Location[];
 
   constructor(@Inject(MAT_DIALOG_DATA) private carId: number,
               private fb: FormBuilder,
               private carService: CarService,
+              private locationService: LocationService,
               private notification: NotificationService,
               private dialog: MatDialog) {}
  
   ngOnInit(): void {
+    this.getLocations();
+
     if (this.isEditMode) {
       this.getCar();
       this.buildEditForm();
     } else {
       this.buildForm();
     }
+  }
+
+  getLocations() {
+    this.subscriptions.push(
+      this.locationService.listAll().subscribe(
+        (response: Location[]) => {
+          this.locations = response;
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.notification.sendErrorNotification(errorResponse.error.message);
+        }
+      )
+    )
   }
 
   buildEditForm() {
@@ -49,11 +68,7 @@ export class CarManagerFormComponent implements OnInit, OnDestroy {
       seatCount: ['', Validators.required],
       fuelType: ['', Validators.required],
       pricePerDay: ['', Validators.required],
-      address: this.fb.group({
-        address: [''],
-        phoneNumber: [''],
-        email: ['']
-      })
+      location: ['']
     });
   }
 
@@ -80,11 +95,7 @@ export class CarManagerFormComponent implements OnInit, OnDestroy {
         seatCount: ['', Validators.required],
         fuelType: ['', Validators.required],
         pricePerDay: ['', Validators.required],
-        address: this.fb.group({
-          address: [''],
-          phoneNumber: [''],
-          email: ['']
-        })
+        location: ['']
       });
   }
 
