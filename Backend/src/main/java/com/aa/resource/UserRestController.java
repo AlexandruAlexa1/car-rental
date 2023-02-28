@@ -65,4 +65,9 @@ public class UserRestController {
 		
 		return ResponseEntity.noContent().build();
 	}
+	
+	@GetMapping("/{email}")
+	public ResponseEntity<User> findByEmail(@PathVariable String email) throws NotFoundException {
+		return new ResponseEntity<>(service.findByEmail(email), HttpStatus.OK);
+	}
 }
