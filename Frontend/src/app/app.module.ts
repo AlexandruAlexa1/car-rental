@@ -27,6 +27,7 @@ import { UserManagerDetailsComponent } from './component/admin/user/user-manager
 import { LocationManagerComponent } from './component/admin/location/location-manager/location-manager.component';
 import { LocationDetailsComponent } from './component/admin/location/location-details/location-details.component';
 import { LocationFormComponent } from './component/admin/location/location-form/location-form.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { LocationFormComponent } from './component/admin/location/location-form/
     RentManagerFormComponent,
     LocationManagerComponent,
     LocationDetailsComponent,
-    LocationFormComponent
+    LocationFormComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

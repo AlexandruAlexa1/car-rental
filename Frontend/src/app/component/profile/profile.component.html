@@ -1,0 +1,184 @@
+ <button class="fa-sharp fa-solid fa-user show-profile-btn" (click)="showProfile()"></button>
+ 
+<div class="user-profile">
+    <button (click)="logOut()" class="logout-btn">Logout</button>
+    
+    <div class="user-profile-content">
+            <div class="role">
+                ROLE[S]:
+                &nbsp;
+                <!-- <div *ngFor="let role of authUser.roles">
+                    {{role.name}}
+                    &nbsp;
+                </div> -->
+            </div>
+        
+            <!-- Form -->
+            <form [formGroup]="profileForm" (ngSubmit)="updateAccount()">
+                <input type="hidden" name="id" formControlName="id">
+
+                <div class="input-group">
+                    <label for="email">E-mail:</label>
+                    <input formControlName="email" type="email" name="email">
+        
+                    <div *ngIf="profileForm.get('email')?.invalid && (profileForm.get('email')?.dirty || profileForm.get('email')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('email')?.errors?.['required']">
+                            E-mail is required.
+                        </div>
+                        <div *ngIf="profileForm.get('email')?.errors?.['minlength']">
+                            E-mail must be at least 5 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('email')?.errors?.['maxlength']">
+                            E-mail must have maximum 125 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input formControlName="password" type="password" name="password" placeholder="Leave blank if you do not want to change the password">
+        
+                    <div *ngIf="profileForm.get('password')?.invalid && (profileForm.get('password')?.dirty || profileForm.get('password')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('password')?.errors?.['required']">
+                            Password is required.
+                        </div>
+                        <div *ngIf="profileForm.get('password')?.errors?.['minlength']">
+                            Password must be at least 5 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('password')?.errors?.['maxlength']">
+                            Passwrod must have maximum 64 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="password">Repeat password:</label>
+                    <input formControlName="password" type="password">
+                </div>
+        
+                
+                <div class="input-group">
+                    <label for="firstName">First Name:</label>
+                    <input formControlName="firstName" type="text" name="firstName">
+        
+                    <div *ngIf="profileForm.get('firstName')?.invalid && (profileForm.get('firstName')?.dirty || profileForm.get('firstName')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('firstName')?.errors?.['required']">
+                            First name is required.
+                        </div>
+                        <div *ngIf="profileForm.get('firstName')?.errors?.['minlength']">
+                            First name must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('firstName')?.errors?.['maxlength']">
+                            First name must have maximum 45 characters long.
+                        </div>
+                    </div> 
+                </div>
+        
+                <div class="input-group">
+                    <label for="lastName">Last Name:</label>
+                    <input formControlName="lastName" type="text" name="lastName">
+        
+                    <div *ngIf="profileForm.get('lastName')?.invalid && (profileForm.get('lastName')?.dirty || profileForm.get('lastName')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('lastName')?.errors?.['required']">
+                            Last name is required.
+                        </div>
+                        <div *ngIf="profileForm.get('lastName')?.errors?.['minlength']">
+                            Last name must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('lastName')?.errors?.['maxlength']">
+                            Last name must have maximum 45 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div formGroupName="address">
+                <div class="input-group">
+                    <label for="city">City:</label>
+                    <input formControlName="city" type="text" name="city">
+        
+                    <div *ngIf="profileForm.get('city')?.invalid && (profileForm.get('city')?.dirty || profileForm.get('city')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('city')?.errors?.['required']">
+                            City is required.
+                        </div>
+                        <div *ngIf="profileForm.get('city')?.errors?.['minlength']">
+                            City must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('city')?.errors?.['maxlength']">
+                            City must have maximum 20 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="state">State:</label>
+                    <input formControlName="state" type="text" name="state">
+        
+                    <div *ngIf="profileForm.get('state')?.invalid && (profileForm.get('state')?.dirty || profileForm.get('state')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('state')?.errors?.['required']">
+                            State is required.
+                        </div>
+                        <div *ngIf="profileForm.get('state')?.errors?.['minlength']">
+                            State must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('state')?.errors?.['maxlength']">
+                            State must have maximum 20 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="country">Country:</label>
+                    <input formControlName="country" type="text" name="country">
+        
+                    <div *ngIf="profileForm.get('country')?.invalid && (profileForm.get('country')?.dirty || profileForm.get('country')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('country')?.errors?.['required']">
+                            Country is required.
+                        </div>
+                        <div *ngIf="profileForm.get('country')?.errors?.['minlength']">
+                            Country must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('country')?.errors?.['maxlength']">
+                            Country must have maximum 20 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="postalCode">Postal code:</label>
+                    <input formControlName="postalCode" type="text" name="postalCode">
+                    
+                    <div *ngIf="profileForm.get('postalCode')?.invalid && (profileForm.get('postalCode')?.dirty || profileForm.get('postalCode')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('postalCode')?.errors?.['required']">
+                            Postal code is required.
+                        </div>
+                        <div *ngIf="profileForm.get('postalCode')?.errors?.['minlength']">
+                            Postl code must be at least 2 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('postalCode')?.errors?.['maxlength']">
+                            Postal Code must have maximum 20 characters long.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="input-group">
+                    <label for="phoneNumber">Phone number:</label>
+                    <input formControlName="phoneNumber" type="text" name="phoneNumber">
+        
+                    <div *ngIf="profileForm.get('phoneNumber')?.invalid && (profileForm.get('phoneNumber')?.dirty || profileForm.get('phoneNumber')?.touched)" class="validation-error">
+                        <div *ngIf="profileForm.get('phoneNumber')?.errors?.['required']">
+                            Phone Number is required.
+                        </div>
+                        <div *ngIf="profileForm.get('phoneNumber')?.errors?.['minlength']">
+                            Phone Number must be at least 10 characters long.
+                        </div>
+                        <div *ngIf="profileForm.get('phoneNumber')?.errors?.['maxlength']">
+                            Phone Number must have maximum 15 characters long.
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <input type="submit" value="Update Account" class="submit-btn" [disabled]="profileForm.invalid">
+            </form>
+    </div>
+</div>

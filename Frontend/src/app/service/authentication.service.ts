@@ -1,6 +1,7 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { AuthRequest } from '../domain/auth-request';
 import { Jwt } from '../domain/jwt';
@@ -15,7 +16,8 @@ export class AuthenticationService {
   token: string | null;
   host = 'http://localhost:8080';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private cookieService: CookieService) { }
 
   loginUser(authRequest: AuthRequest): Observable<HttpResponse<Jwt>> {
     return this.httpClient.post<Jwt>(`${this.host}/auth/login`, authRequest, { observe: 'response' });
@@ -59,6 +61,7 @@ export class AuthenticationService {
   saveAuthToken(token: string): void {
     this.token = token;
     localStorage.setItem('token', token);
+    // this.cookieService.set('token', token, { httpOnly: true, secure: true })
   }
 
   getAuthToken(): any {

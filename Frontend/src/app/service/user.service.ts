@@ -7,7 +7,6 @@ import { User } from '../domain/user';
   providedIn: 'root'
 })
 export class UserService {
- 
   private host = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient) { }
@@ -34,5 +33,9 @@ export class UserService {
 
   register(user: User): Observable<User> {
     return this.httpClient.post<User>(`${this.host}/auth/register`, user);
+  }
+
+  findByEmail(email: string | null): Observable<User> {
+    return this.httpClient.get<User>(`${this.host}/api/v1/users/${email}`);
   }
 }
