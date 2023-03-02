@@ -15,6 +15,8 @@ Car Details,
 Custom CSS,
 User Management,
 Car Management,
+Rent Management,
+Location Management,
 ...
 
 I am currently working on this project.
