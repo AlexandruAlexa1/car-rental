@@ -34,14 +34,14 @@ public class UserRepositoryTest {
 	
 	@BeforeEach
 	void init() {
-		String password = "0000";
+		String password = "password";
 		String encodedPassword = passwordEncoder.encode(password);
 		
 		Address address_1 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		Address address_2 = new Address("City", "State", "Country", "Postal Code", "Phone Number");
 		
-		user_1 = new User("admin11@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
-		user_2 = new User("user11@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_2, new Role(2));
+		user_1 = new User("admin@yahoo.com", encodedPassword, "Admin", "Admin", new Date(), new Date(), true, true, address_1, new Role(1));
+		user_2 = new User("user@yahoo.com", encodedPassword, "User", "User", new Date(), new Date(), true, true, address_2, new Role(2));
 	}
 	
 	@Test
